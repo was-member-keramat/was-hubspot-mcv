@@ -1,6 +1,6 @@
 {
   "name": "was-hubspot-mcv",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Shareable HubSpot MCP server — manage HubSpot contacts, companies, deals, owners, and custom API calls.",
   "type": "module",
   "bin": {
