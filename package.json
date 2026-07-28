@@ -1,6 +1,6 @@
 {
   "name": "was-hubspot-mcv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shareable HubSpot MCP server — manage HubSpot contacts, companies, deals, owners, and custom API calls.",
   "type": "module",
   "bin": {
@@ -31,7 +31,7 @@
   "license": "MIT",
   "homepage": "https://github.com/was-member-keramat/was-hubspot-mcv",
   "repository": {
-    "type": "git",
+    "type": "gitb,
     "url": "https://github.com/was-member-keramat/was-hubspot-mcv.git"
   },
   "bugs": {
