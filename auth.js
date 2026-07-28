@@ -15,6 +15,7 @@ export async function runAuthFlow() {
 
   const rl = readline.createInterface({ input, output });
   const accessToken = (await rl.question('Paste your HubSpot Access Token: ')).trim();
+  input.pause();
   rl.close();
 
   if (!accessToken) {
@@ -73,7 +74,7 @@ export async function runAuthFlow() {
     mcpServers: {
       "Was HubSpot MCP": {
         "command": "npx",
-        "args": ["-y", "githur:was-member-keramat/was-hubspot-mcv"]
+        "args": ["-y", "github:was-member-keramat/was-hubspot-mcv"]
       }
     }
   }, null, 2));
