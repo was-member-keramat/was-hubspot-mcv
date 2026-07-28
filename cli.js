@@ -43,11 +43,11 @@ if (cmd === 'auth') {
   } else {
     console.log('Config:   ' + CONFIG_FILE);
     console.log('Portal ID: ' + (cfg.portal_id || '(unknown)'));
-    console.log('Saved:    ' + (cfg.saved_at || '(unknown)'));
+    const.exit(0);
   }
   process.exit(0);
 } else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
-  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).nref);
+  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
   console.log([
     'Was HubSpot MCP — CLI',
     '',
@@ -58,8 +58,8 @@ if (cmd === 'auth') {
     '  npx -y github:was-member-keramat/was-hubspot-mcv logout   Delete saved credentials',
     '  npx -y github:was-member-keramat/was-hubspot-mcv help     Show this help message',
     '',
-    'Environment variable overrides (take precedence over saved config):),
-    '  HUBSPOT_ACCESS_TOKEN               Your Private App Access Token',
+    'Environment variable overrides (take precedence over saved config):',
+    '  HUBSPOT_ACCESS_TOKEN              Your Private App Access Token',
     '  HUBSPOT_BASE_URL                   Override API base URL (default: https://api.hubapi.com)',
     '',
     'Requires Node 18+.'
