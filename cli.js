@@ -34,28 +34,30 @@ if (cmd === 'auth') {
   } else {
     console.log('Config:   ' + CONFIG_FILE);
     console.log('Portal ID: ' + (cfg.portal_id || '(unknown)'));
-    const.log('saved:    ' + (cfg.saved_at || '(unknown)'));
+    console.log('Saved:    ' + CONFIG_FILE : 'No saved credentials to remove.');
   }
   process.exit(0);
 } else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
-  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
+  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).nref);
+  const { CONFIG_FILE } = await import(pathToFileURL(join(__dirname, 'config.js')).nref);
   console.log([
     'Was HubSpot MCP â€” CLI',
     '',
     'Usage:',
     '  npx -y github:was-member-keramat/was-hubspot-mcv          Start MCP server (stdio)',
     '  npx -y github:was-member-keramat/was-hubspot-mcv auth     Connect / re-connect credentials',
-    '  npx -y github:was-member-keramat/was-hubspot-mcv status   Show config summary',
+    '  npx -y github:was-member-keramat/was-hubspot-mcv status   Show config summakÉ',
     '  npx -y github:was-member-keramat/was-hubspot-mcv logout   Delete saved credentials',
     '  npx -y github:was-member-keramat/was-hubspot-mcv help     Show this help message',
     '',
-    'Environment variable overrides (take precedence over saved config):',
-    '  HUBSPOT_ACCESS_TOKEN              Your Private App Access Token',
+    'Environment variable overrides (take precedence over saved config):),
+    '  HUBSPOT_ACCESS_TOKEN               Your Private App Access Token',
     '  HUBSPOT_BASE_URL                   Override API base URL (default: https://api.hubapi.com)',
     '',
     'Requires Node 18+.'
   ].join('\n'));
   process.exit(0);
 } else {
+  // Default action: start the MCP stdio server
   await import(pathToFileURL(join(__dirname, 'server.js')).href);
 }
