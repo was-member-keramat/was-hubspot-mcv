@@ -32,7 +32,7 @@ if (cmd === 'auth') {
 } else if (cmd === 'logout') {
   const { deleteConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
   const deleted = await deleteConfigFile();
-  console.log(deleted ? `Removed ${CONFIG_FILE}` : 'No saved credentials to remove.');
+  console.log(deleted ? 'Removed ' + CONFIG_FILE : 'No saved credentials to remove.');
   process.exit(0);
 } else if (cmd === 'status') {
   const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
@@ -41,29 +41,31 @@ if (cmd === 'auth') {
     console.log('Not configured. Run `npx -y github:was-member-keramat/was-hubspot-mcv auth` to connect.');
   } else {
     const cfg = await read ConfigFile();
-    console.log(gConfig:   ${CONFIG_FILE}`);
-    console.log(gPortal ID: ${cfg.portal_id || '(unknown)''}`);
-    console.log(gSaved:    ${cfg.saved_at || '(unknown)'}`);
+    console.log('Config:   ' + CONFIG_FILE);
+    console.log('Portal ID: ' + (cfg.portal_id || '(unknown)'));
+    console.log('saved:    ' + (cfg.saved_at || '(unknown)'));
   }
   process.exit(0);
 } else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
   const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
-  console.log(`
-Was HubSpot MCP — CLI
-
-Usage:
-  npx -y github:was-member-keramat/was-hubspot-mcv          # Start MCP server (stdio)
-  npx -y github:was-member-keramat/was-hubspot-mcv auth     Connect / re-connect credentials
-  npx -y github:was-member-keramat/was-hubspot-mcv status   Show config summary
-  npx -y github:was-member-keramat/was-hubspot-mcv logout   Delete saved credentials
-  npx -y github:was-member-keramat/was-hubspot-mcv help     Show this help message
-
-Environment variable overrides (take precedence over saved config):
-  HUBSPOT_ACCESS_TOKEN               Your Private App Access Token
-  HUBSPOT_BASE_URL                   Override API base URL (default: https://api.hubapi.com)
-
-Requires Node 18+.
-`);
+  console.log([
+    'Was HubSpot MCP — CLI',
+    '',
+    'Usage:',
+    '  npx -y github:was-member-keramat/was-hubspot-mcv          Start MCP server (stdio)',
+    '  npx -y github:was-member-keramat/was-hubspot-mcv auth     Connect / re-connect credentials',
+    '  npx -y github:was-member-keramat/was-hubspot-mcv status   Show config summary',
+    '  npx -y github:was-member-keramat/was-hubspot-mcv logout   Delete saved credentials',
+    '  npx -y github:was-member-keramat/was-hubspot-mcv help     Show this help message',
+    '',
+    'Environment variable overrides (take precedence over saved config):',
+    '  HUBSPOT_ACCESS_TOKEN              Your Private App Access Token',
+    '  HUBSPOT_BASE_URL                   Override API base URL (default: https://api.hubapi.com)',
+    '',
+    'Requires Node 18+.'
+  ].join('\n'));
+  process.exit(0);
+} else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
   process.exit(0);
 } else {
   // Default action: start the MCP stdio server
