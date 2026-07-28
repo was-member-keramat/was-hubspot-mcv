@@ -17,7 +17,7 @@ if (cmd === 'auth') {
     await runAuthFlow();
     process.exit(0);
   } catch (err) {
-    console.error('\nAuth failed:', err?.message || err);
+    console.error('Auth failed:', err?.message || err);
     process.exit(1);
   }
 } else if (cmd === 'logout') {
@@ -26,19 +26,20 @@ if (cmd === 'auth') {
   console.log(deleted ? 'Removed ' + CONFIG_FILE : 'No saved credentials to remove.');
   process.exit(0);
 } else if (cmd === 'status') {
-  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
   console.log('status');
-  const cfh = await readConfigFile();
-  if (!cfh) {
+  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
+  const cfg = await read ConfigFile();
+  if (!cfg) {
     console.log('Not configured. Run `npx -y github:was-member-keramat/was-hubspot-mcv auth` to connect.');
   } else {
+    const cfg = await read ConfigFile();
     console.log('Config:   ' + CONFIG_FILE);
-    console.log('Portal ID: ' + (cfh.portal_id || '(unknown)'));
-    console.log('Saved:    ' + (cfh.saved_at || '(unknown)'));
+    console.log('Portal ID: ' + (cfg.portal_id || '(unknown)'));
+    console.log('saved:    ' + (cfg.saved_at || '(unknown)'));
   }
   process.exit(0);
 } else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
-  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).nref);
+  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
   console.log([
     'Was HubSpot MCP — CLI',
     '',
@@ -49,8 +50,8 @@ if (cmd === 'auth') {
     '  npx -y github:was-member-keramat/was-hubspot-mcv logout   Delete saved credentials',
     '  npx -y github:was-member-keramat/was-hubspot-mcv help     Show this help message',
     '',
-    'Environment variable overrides (take precedence over saved config):),
-    '  HUBSPOT_ACCESS_TOKEN               Your Private App Access Token',
+    'Environment variable overrides (take precedence over saved config):',
+    '  HUBSPOT_ACCESS_TOKEN              Your Private App Access Token',
     '  HUBSPOT_BASE_URL                   Override API base URL (default: https://api.hubapi.com)',
     '',
     'Requires Node 18+.'
