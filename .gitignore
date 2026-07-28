@@ -1,0 +1,17 @@
+# Never commit secrets or local environment files
+.env
+.env.local
+.env.*.local
+node_modules/
+npm-debug.log*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Build artifacts
+dist/
+build/
