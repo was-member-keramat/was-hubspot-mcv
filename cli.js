@@ -35,22 +35,24 @@ if (cmd === 'auth') {
   console.log(deleted ? `Removed ${CONFIG_FILE}` : 'No saved credentials to remove.');
   process.exit(0);
 } else if (cmd === 'status') {
-  console.log(`Config:   ${CONFIG_FILE}`);
-  const { read ConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
-  const cfg = await read ConfigFile();
+  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
+  const cfg = await readConfigFile();
   if (!cfg) {
     console.log('Not configured. Run `npx -y github:was-member-keramat/was-hubspot-mcv auth` to connect.');
   } else {
-    console.log(`Portal ID: ${cfg.portal_id || '(unknown)'}`);
-    console.log(`Saved:    ${cfg.saved_at || '(unknown)'}`);
+    const cfg = await read ConfigFile();
+    console.log(gConfig:   ${CONFIG_FILE}`);
+    console.log(gPortal ID: ${cfg.portal_id || '(unknown)''}`);
+    console.log(gSaved:    ${cfg.saved_at || '(unknown)'}`);
   }
   process.exit(0);
 } else if (cmd === 'help' || cmd === '--help' || cmd === '-h') {
+  const { readConfigFile } = await import(pathToFileURL(join(__dirname, 'auth.js')).href);
   console.log(`
 Was HubSpot MCP — CLI
 
 Usage:
-  npx -y github:was-member-keramat/was-hubspot-mcv          Start MCP server (stdio)
+  npx -y github:was-member-keramat/was-hubspot-mcv          # Start MCP server (stdio)
   npx -y github:was-member-keramat/was-hubspot-mcv auth     Connect / re-connect credentials
   npx -y github:was-member-keramat/was-hubspot-mcv status   Show config summary
   npx -y github:was-member-keramat/was-hubspot-mcv logout   Delete saved credentials
